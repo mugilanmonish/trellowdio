@@ -1,0 +1,24 @@
+{
+  "name": "WebdriverIO_POM",
+  "type": "module",
+  "devDependencies": {
+    "@wdio/allure-reporter": "^8.39.0",
+    "@wdio/cli": "^8.39.0",
+    "@wdio/local-runner": "^8.39.0",
+    "@wdio/mocha-framework": "^8.39.0",
+    "@wdio/spec-reporter": "^8.39.0",
+    "allure-commandline": "^2.29.0"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  },
+  "scripts": {
+    "test": "wdio run wdio.conf.js",
+    "generate:report": "npx allure generate --clean allure-results",
+    "open:report": "npx allure open",
+    "rimraf:report":"npx rimraf allure-reports",
+    "rimraf:results":"npx rimraf allure-results",
+    "test:endtoend":"npx wdio run wdio.conf.js --suite endtoend",
+    "test:functionality":"npx wdio run wdio.conf.js --suite functionality"
+  }
+}
