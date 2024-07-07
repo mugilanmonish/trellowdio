@@ -10,15 +10,17 @@
     "allure-commandline": "^2.29.0"
   },
   "dependencies": {
-    "exceljs": "^4.4.0"
+    "dotenv": "^16.4.5",
+    "exceljs": "^4.4.0",
+    "wdio-browserstack-service": "^0.1.19"
   },
   "scripts": {
     "test": "wdio run wdio.conf.js",
     "generate:report": "npx allure generate --clean allure-results",
     "open:report": "npx allure open",
-    "rimraf:report":"npx rimraf allure-reports",
-    "rimraf:results":"npx rimraf allure-results",
-    "test:endtoend":"npx wdio run wdio.conf.js --suite endtoend",
-    "test:functionality":"npx wdio run wdio.conf.js --suite functionality"
+    "rimraf:report": "npx rimraf allure-reports",
+    "rimraf:results": "npx rimraf allure-results",
+    "test:endtoend": "npx wdio run wdio.conf.js --suite endtoend",
+    "test:functionality": "npx wdio run wdio.conf.js --suite functionality"
   }
 }

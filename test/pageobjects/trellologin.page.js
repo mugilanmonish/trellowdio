@@ -15,11 +15,11 @@ class TrelloLoginPage {
      * @param {String} email Give the email address
      * @param {String} password Give the password
      */
-    async loginToApp(email, password) {
-        await this.inputEmail.setValue(email)
+    async loginToApp() {
+        await this.inputEmail.setValue(process.env.email)
         await this.btnContinue.click()
         await this.inputPassword.waitForDisplayed()
-        await this.inputPassword.setValue(password)
+        await this.inputPassword.setValue(process.env.password)
         await this.btnLogin.click()
         await WebdriverioUtils.waitUntilTitleLoad('Boards | Trello')
         const homePageTitle = await browser.getTitle();

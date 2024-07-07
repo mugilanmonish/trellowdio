@@ -10,7 +10,7 @@ describe('Trello',()=>{
         await browser.url("/")
         await browser.maximizeWindow()
         await TrelloMainPage.loginClick()
-        await TrelloLoginPage.loginToApp("mugilanmonish@gmail.com", "Qwertyuiop@123");
+        await TrelloLoginPage.loginToApp();
         await TrelloBoardsPage.goToHelpPage()
         await TrelloSupportPage.helpPageVerification()
         await TrelloBoardsPage.switchBackToBoards()

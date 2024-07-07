@@ -9,7 +9,7 @@ describe('Trello', () => {
         await browser.url('/')
         await browser.maximizeWindow()
         await TrelloMainPage.loginClick()
-        await TrelloLoginPage.loginToApp("mugilanmonish@gmail.com", "Qwertyuiop@123")
+        await TrelloLoginPage.loginToApp()
         await TrelloBoardsPage.createBoard('Javascript Board')
         await TrelloJavaScriptBoardPage.createAndArrangeCards('Topics', 'Selenium', 'WebdriverIo', 'Webdriver methods', 'Browser')
         await TrelloJavaScriptBoardPage.closeBoard()

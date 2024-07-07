@@ -10,7 +10,7 @@ describe('Trello', async () => {
         await browser.url("/")
         await browser.maximizeWindow()
         await TrelloMainPage.loginClick();
-        await TrelloLoginPage.loginToApp("mugilanmonish@gmail.com", "Qwertyuiop@123");
+        await TrelloLoginPage.loginToApp();
         await TrelloBoardsPage.clickTemplate()
         await TrelloTemplatePage.createBoardUsingTemplate('New Tier')
         await TrelloJavaScriptBoardPage.templateCloseBoard();

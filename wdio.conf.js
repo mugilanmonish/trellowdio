@@ -1,3 +1,7 @@
+import * as dotenv from "dotenv";
+const envFile = process.env.NODE_ENV==='testing'?'.env.testing':'.env.production';
+dotenv.config({path:envFile});
+
 export const config = {
     //
     // ====================
@@ -50,17 +54,23 @@ export const config = {
     // files and you set maxInstances to 10, all spec files will get tested at the same time
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
-    //
+    
     maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
+    /*
     capabilities: [{
         browserName: 'chrome'
     }],
-
+    */
+    capabilities: [
+        {
+            browserName: 'chrome',
+        }
+    ],
     //
     // ===================
     // Test Configurations
@@ -92,7 +102,7 @@ export const config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://trello.com/',
+    baseUrl: `${process.env.url}`,
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 20000,
@@ -120,7 +130,7 @@ export const config = {
 
     //
     // The number of times to retry the entire specfile when it fails as a whole
-    // specFileRetries: 1,
+    //   specFileRetries: 1,
     //
     // Delay in seconds between the spec file retry attempts
     // specFileRetriesDelay: 0,
