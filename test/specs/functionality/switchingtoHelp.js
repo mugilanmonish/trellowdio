@@ -17,4 +17,4 @@ describe('Trello',()=>{
         await TrelloBoardsPage.btnLogout.click()
         await TrelloLogoutPage.logoutToApp()
     })
-}) 
+})

@@ -1,3 +1,5 @@
+import { execSync } from "child_process";
+import { assert, expect } from "chai";
 import * as dotenv from "dotenv";
 const envFile = process.env.NODE_ENV==='testing'?'.env.testing':'.env.production';
 dotenv.config({path:envFile});
@@ -9,7 +11,7 @@ export const config = {
     // ====================
     // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
-    //
+    
     // ==================
     // Specify Test Files
     // ==================
@@ -37,7 +39,7 @@ export const config = {
     },
     // Patterns to exclude.
     exclude: [
-        './test/specs/functionality/switchingtoHelp.js'
+        './test/specs/functionality/dummy.js'
     ],
     //
     // ============
@@ -102,8 +104,8 @@ export const config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: `${process.env.url}`,
-    //
+    baseUrl: 'https://trello.com/',
+    
     // Default timeout for all waitFor* commands.
     waitforTimeout: 20000,
     //
@@ -128,7 +130,6 @@ export const config = {
     // before running any tests.
     framework: 'mocha',
 
-    //
     // The number of times to retry the entire specfile when it fails as a whole
     //   specFileRetries: 1,
     //
@@ -148,7 +149,6 @@ export const config = {
             disableWebdriverScreenshotsReporting: false,
         }]
     ],
-
 
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -209,8 +209,10 @@ export const config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {object}         browser      instance of created browser/device session
      */
-    // before: function (capabilities, specs) {
-    // },
+     before: function (capabilities, specs) {
+    //    global.expect=expect,
+        global.assert=assert
+     },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {string} commandName hook command name
@@ -222,12 +224,12 @@ export const config = {
      * Hook that gets executed before the suite starts
      * @param {object} suite suite details
      */
-    // beforeSuite: function (suite) {
+    // beforeSuite: async function (suite) {
     // },
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
-    // beforeTest: function (test, context) {
+    // beforeTest: async function (test, context) {
     // },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
@@ -256,14 +258,12 @@ export const config = {
             await browser.takeScreenshot();
         }
     },
-
-
     /**
      * Hook that gets executed after the suite has ended
      * @param {object} suite suite details
      */
-    // afterSuite: function (suite) {
-    // },
+    //  afterSuite: function (suite) {
+    //  },
     /**
      * Runs after a WebdriverIO command gets executed
      * @param {string} commandName hook command name
@@ -298,8 +298,9 @@ export const config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {<Object>} results object containing test results
      */
-    // onComplete: function(exitCode, config, capabilities, results) {
-    // },
+    onComplete: function(exitCode, config, capabilities, results) {
+        execSync('npx allure generate allure-results --clean -o allure-report', { stdio: 'inherit' });
+    },
     /**
     * Gets executed when a refresh happens.
     * @param {string} oldSessionId session ID of the old session
