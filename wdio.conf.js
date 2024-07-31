@@ -1,8 +1,8 @@
 import { execSync } from "child_process";
 import { assert, expect } from "chai";
 import * as dotenv from "dotenv";
-const envFile = process.env.NODE_ENV==='testing'?'.env.testing':'.env.production';
-dotenv.config({path:envFile});
+const envFile = process.env.NODE_ENV === 'testing' ? '.env.testing' : '.env.production';
+dotenv.config({ path: envFile });
 
 export const config = {
     //
@@ -11,7 +11,7 @@ export const config = {
     // ====================
     // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
-    
+
     // ==================
     // Specify Test Files
     // ==================
@@ -29,11 +29,11 @@ export const config = {
     specs: [
         './test/specs/**/*.js'
     ],
-    suites : {
-        endtoend:[
+    suites: {
+        endtoend: [
             './test/specs/endtoend/**/*.js'
         ],
-        functionality:[
+        functionality: [
             './test/specs/functionality/**/*.js'
         ]
     },
@@ -56,7 +56,7 @@ export const config = {
     // files and you set maxInstances to 10, all spec files will get tested at the same time
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
-    
+
     maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
@@ -71,6 +71,10 @@ export const config = {
     capabilities: [
         {
             browserName: 'chrome',
+            'goog:chromeOptions': {
+                //args: ['headless', 'disable-gpu','disable-notifications']
+                args: ['disable-notifications']
+            }
         }
     ],
     //
@@ -104,8 +108,8 @@ export const config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://trello.com/',
-    
+    // baseUrl: 'https://trello.com/',
+
     // Default timeout for all waitFor* commands.
     waitforTimeout: 20000,
     //
@@ -154,7 +158,8 @@ export const config = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000
+        timeout: 60000,
+        retries : 4
     },
 
     //
@@ -209,10 +214,10 @@ export const config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {object}         browser      instance of created browser/device session
      */
-     before: function (capabilities, specs) {
-    //    global.expect=expect,
-        global.assert=assert
-     },
+    before: function (capabilities, specs) {
+        //    global.expect=expect,
+        global.assert = assert
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {string} commandName hook command name
@@ -298,9 +303,9 @@ export const config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {<Object>} results object containing test results
      */
-    onComplete: function(exitCode, config, capabilities, results) {
-        execSync('npx allure generate allure-results --clean -o allure-report', { stdio: 'inherit' });
-    },
+    // onComplete: function (exitCode, config, capabilities, results) {
+    //     execSync('npx allure generate allure-results --clean -o allure-report', { stdio: 'inherit' });
+    // },
     /**
     * Gets executed when a refresh happens.
     * @param {string} oldSessionId session ID of the old session

@@ -17,7 +17,7 @@
     "wdio-browserstack-service": "^0.1.19"
   },
   "scripts": {
-    "test": "wdio run wdio.conf.js",
+    "test": "npx wdio run wdio.conf.js",
     "generate:report": "npx allure generate --clean allure-results",
     "open:report": "npx allure open",
     "rimraf:report": "npx rimraf allure-reports",

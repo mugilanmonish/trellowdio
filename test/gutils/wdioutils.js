@@ -26,6 +26,35 @@ class WebdriverioUtils {
             timeoutMsg: "EXPECTED URL IS NOT MATCHING"
         })
     }
+
+    async waitForSuggestion(element) {
+        await browser.waitUntil(async () => {
+            return await $(element).isDisplayed()
+        }, {
+            timeout: 10000,
+            interval: 500,
+            timeoutMsg: 'Suggestion is not dispalyed in the specied time'
+        })
+    }
+
+    async waitForDoubleDollarSelector(selector) {
+        await browser.waitUntil(
+            async () => {
+                const element = await $$(selector)
+                return element.length > 10;
+            }, {
+                timeout : 10000,
+                interval : 500,
+                timeoutMsg : `No element found for the given selector within the timeout`
+            }
+        )
+    }
+
+    async fetchElementColour(locator) {
+        const element = await $(locator)
+        const rgbColor = await element.getCSSProperty('color')
+        return (rgbColor.parsed.hex.toString())
+    }
 }
 
 export default new WebdriverioUtils();
